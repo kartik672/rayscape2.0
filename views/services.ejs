@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #000;
+      transition: color 0.3s ease;
+    }
+
+    .logo:hover {
+      color: #555;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 1100;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #000;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #000;
+      font-size: 16px;
+      padding: 8px 15px;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #fff;
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      color: #fff !important;
+      background-color: #000;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background: rgba(255, 255, 255, 0.95);
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s ease;
+        gap: 20px;
+        z-index: 1050;
+      }
+
+      nav.open {
+        right: 0;
+      }
+
+      nav a {
+        font-size: 24px;
+        padding: 12px 20px;
+      }
+
+      nav a.active {
+        background-color: #000;
+        color: #fff !important;
+      }
+    }
+
+    @media (min-width: 768px) {
+      nav {
+        position: static;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+        background: none;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Rayscape Films</div>
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="navLinks">
+      <a href="/" id="homeLink">Home</a>
+      <a href="/about" id="aboutLink">About</a>
+      <a href="/showreel" id="showreelLink">Opportunities</a>
+      <a href="/services" id="servicesLink">Services</a>
+      <a href="/contact" id="contactLink">Contact</a>
+    </nav>
+  </header>
+
+  <section id="services" style="font-family: 'Arial', sans-serif; max-width: 100%; margin: 0; padding: 0; color: white; overflow: hidden;">
+    <!-- Cinematic Videography Full-width Section -->
+    <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; position: relative; overflow: hidden;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px; transform: translateX(-100%); animation: slideInLeft 1s forwards 0.3s;">
+            <div style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 12l-7 7-3-3-3 3-7-7"></path>
+                    <path d="M17 12l-7-7-3 3-3-3-7 7"></path>
+                </svg>
+            </div>
+            <h2 style="font-size: 3rem; margin-bottom: 20px; line-height: 1.2;">Cinematic Videography</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6; max-width: 600px; margin-bottom: 30px;">
+                Professional filmmaking techniques to capture your story with dramatic impact and visual appeal.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">4K Resolution</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Drone Shots</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Slow Motion</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Editing Full-width Section -->
+    <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; position: relative; overflow: hidden;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px; transform: translateX(100%); animation: slideInRight 1s forwards 0.3s; text-align: right; margin-left: auto;">
+            <div style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; margin-left: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+            </div>
+            <h2 style="font-size: 3rem; margin-bottom: 20px; line-height: 1.2;">Professional Editing</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6; max-width: 600px; margin-bottom: 30px; margin-left: auto;">
+                Industry-leading software to transform raw footage into polished chromatic masterpieces.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;">
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Adobe Premiere</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">DaVinci Resolve</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">After Effects</span>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideInLeft {
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        #services > div {
+            transition: all 0.5s ease;
+        }
+        
+        #services > div:hover {
+            transform: scale(1.005);
+        }
+    </style>
+</section>
+
+<!-- another page  -->
+<section id="team" style="font-family: 'Arial', sans-serif; max-width: 100%; margin: 0; padding: 0; color: white; overflow: hidden;">
+  <!-- Cinematographers Full-width Section -->
+  <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518930107639-f4538ad82a00?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNpbmVtYXRvZ3JhcGh5fGVufDB8fDB8fHww') center/cover; display: flex; align-items: center; position: relative; overflow: hidden; padding: 20px; box-sizing: border-box;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 2rem; transform: translateX(-100%); animation: slideInLeft 1s forwards 0.3s; width: 100%;">
+          <div style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+          </div>
+          <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; line-height: 1.2;">Professional Cinematographers</h2>
+          <p style="font-size: clamp(1rem, 2vw, 1.2rem); opacity: 0.9; line-height: 1.6; max-width: 100%; margin-bottom: 1.5rem;">
+              Our skilled cinematographers bring your vision to life with expert lighting, framing, and camera work.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap;">Lighting Experts</span>
+              <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap;">Camera Specialists</span>
+              <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap;">Composition Masters</span>
+          </div>
+      </div>
+  </div>
+
+  <!-- Editors & Designers Full-width Section -->
+  <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; position: relative; overflow: hidden; padding: 20px; box-sizing: border-box;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 2rem; transform: translateX(100%); animation: slideInRight 1s forwards 0.3s; width: 100%; text-align: right;">
+          <div style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; margin-left: auto;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+          </div>
+          <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; line-height: 1.2;">Editors & Designers</h2>
+          <p style="font-size: clamp(1rem, 2vw, 1.2rem); opacity: 0.9; line-height: 1.6; max-width: 100%; margin-bottom: 1.5rem; margin-left: auto;">
+              Our creative team transforms raw footage into visual masterpieces with cutting-edge editing and design.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;">
+              <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap;">Video Editors</span>
+              <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap;">Motion Graphics</span>
+              <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap;">Color Grading</span>
+          </div>
+      </div>
+  </div>
+
+  <style>
+      @keyframes slideInLeft {
+          to {
+              transform: translateX(0);
+          }
+      }
+      
+      @keyframes slideInRight {
+          to {
+              transform: translateX(0);
+          }
+      }
+      
+      #team > div {
+          transition: all 0.5s ease;
+      }
+      
+      #team > div:hover {
+          transform: scale(1.005);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+          #team > div[style*="min-height: 100vh"] {
+              min-height: auto;
+              padding: 40px 20px;
+          }
+          #team > div[style*="min-height: 100vh"] > div[style*="padding: 2rem"] {
+              padding: 1.5rem;
+              text-align: center;
+          }
+          #team > div[style*="min-height: 100vh"] > div > div[style*="width: 60px"] {
+              width: 50px;
+              height: 50px;
+              margin-bottom: 1rem;
+              margin-left: auto;
+              margin-right: auto;
+          }
+          #team svg {
+              width: 25px;
+              height: 25px;
+          }
+          #team > div[style*="min-height: 100vh"] > div > div[style*="justify-content: flex-end"] {
+              justify-content: center;
+          }
+          #team > div[style*="min-height: 100vh"] > div > p[style*="margin-left: auto"] {
+              margin-left: 0;
+          }
+      }
+      
+      @media (max-width: 480px) {
+          #team > div[style*="min-height: 100vh"] {
+              padding: 30px 15px;
+          }
+          #team > div[style*="min-height: 100vh"] > div[style*="padding: 2rem"] {
+              padding: 1rem;
+          }
+          #team h2[style*="font-size: clamp"] {
+              margin-bottom: 0.75rem;
+          }
+          #team p[style*="font-size: clamp"] {
+              margin-bottom: 1.25rem;
+          }
+      }
+  </style>
+</section>
+
+<!-- another page  -->
+<section id="production-services" style="font-family: 'Arial', sans-serif; max-width: 100%; margin: 0; padding: 0; color: white; overflow: hidden;">
+    <!-- Song Shoot Full-width Section -->
+    <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWMlMjB2aWRlbyUyMHNob290fGVufDB8fDB8fHww') center/cover; display: flex; align-items: center; position: relative; overflow: hidden;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px; transform: translateX(-100%); animation: slideInLeft 1s forwards 0.3s;">
+            <div style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+            </div>
+            <h2 style="font-size: 3rem; margin-bottom: 20px; line-height: 1.2;">Song Shoot</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6; max-width: 600px; margin-bottom: 30px;">
+                Capturing the essence of your music through visually stunning music videos that amplify your artistic vision.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Concept Development</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Choreography</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Live Performance</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Short Film Shoot Full-width Section -->
+    <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2hvcnQlMjBmaWxtfGVufDB8fDB8fHww') center/cover; display: flex; align-items: center; position: relative; overflow: hidden;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px; transform: translateX(100%); animation: slideInRight 1s forwards 0.3s; text-align: right; margin-left: auto;">
+            <div style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; margin-left: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                    <line x1="7" y1="2" x2="7" y2="22"></line>
+                    <line x1="17" y1="2" x2="17" y2="22"></line>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <line x1="2" y1="7" x2="7" y2="7"></line>
+                    <line x1="2" y1="17" x2="7" y2="17"></line>
+                    <line x1="17" y1="17" x2="22" y2="17"></line>
+                    <line x1="17" y1="7" x2="22" y2="7"></line>
+                </svg>
+            </div>
+            <h2 style="font-size: 3rem; margin-bottom: 20px; line-height: 1.2;">Short Film Shoot</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6; max-width: 600px; margin-bottom: 30px; margin-left: auto;">
+                Bringing compelling stories to life with cinematic excellence, from script to screen.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;">
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Storytelling</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Cinematic Shots</span>
+                <span style="background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">Post-Production</span>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideInLeft {
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        #production-services > div {
+            transition: all 0.5s ease;
+        }
+        
+        #production-services > div:hover {
+            transform: scale(1.005);
+        }
+    </style>
+</section>
+
+<!-- another page  -->
+<section id="creative-platform" style="font-family: 'Arial', sans-serif; max-width: 100%; margin: 0; padding: 0; color: white; overflow: hidden;">
+    <!-- Platform Overview Section -->
+    <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y3JlYXRpdmUlMjBjb2xsYWJvcmF0aW9ufGVufDB8fDB8fHww') center/cover; display: flex; align-items: center; position: relative; overflow: hidden;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px; transform: translateY(100px); opacity: 0; animation: fadeInUp 1s forwards 0.3s; text-align: center;">
+            <h2 style="font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2;">Creative Collective Platform</h2>
+            <p style="font-size: 1.5rem; opacity: 0.9; line-height: 1.6; max-width: 800px; margin: 0 auto 40px;">
+                Uniting actors, photographers, editors, singers, and designers under one creative ecosystem
+            </p>
+        </div>
+    </div>
+
+    <!-- Talent Showcase Section -->
+    <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dGFsZW50JTIwc2hvd2Nhc2V8ZW58MHx8MHx8fDA%3D') center/cover; display: flex; align-items: center; position: relative; overflow: hidden; padding: 20px; box-sizing: border-box;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 2rem; transform: translateX(-100%); animation: slideInLeft 1s forwards 0.5s; width: 100%;">
+          <div style="width: clamp(60px, 8vw, 80px); height: clamp(60px, 8vw, 80px); background-color: rgba(255,215,0,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: clamp(20px, 3vw, 30px);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="clamp(30px, 4vw, 40px)" height="clamp(30px, 4vw, 40px)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"></path>
+              </svg>
+          </div>
+          <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: clamp(15px, 2vw, 25px); line-height: 1.2;">Talent Showcase</h2>
+          <p style="font-size: clamp(1rem, 2vw, 1.2rem); opacity: 0.9; line-height: 1.6; max-width: 100%; margin-bottom: clamp(25px, 4vw, 40px);">
+              Spotlight for emerging and established artists across all creative disciplines to display their portfolio
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: clamp(10px, 2vw, 15px); max-width: 100%;">
+              <span style="background: rgba(255,215,0,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Actors Reel</span>
+              <span style="background: rgba(255,215,0,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Photo Gallery</span>
+              <span style="background: rgba(255,215,0,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Demo Tracks</span>
+              <span style="background: rgba(255,215,0,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Showreels</span>
+              <span style="background: rgba(255,215,0,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Design Portfolio</span>
+              <span style="background: rgba(255,215,0,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Editing Samples</span>
+          </div>
+      </div>
+  </div>
+  
+  <style>
+      @media (max-width: 768px) {
+          div[style*="min-height: 100vh"] {
+              min-height: auto;
+              padding: 40px 20px;
+          }
+          div[style*="padding: 2rem"] {
+              padding: 1.5rem;
+          }
+          div[style*="grid-template-columns"] {
+              grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          }
+      }
+      
+      @media (max-width: 480px) {
+          div[style*="min-height: 100vh"] {
+              padding: 30px 15px;
+          }
+          div[style*="padding: 2rem"] {
+              padding: 1rem;
+          }
+          div[style*="grid-template-columns"] {
+              grid-template-columns: repeat(2, 1fr);
+          }
+          span[style*="white-space: nowrap"] {
+              white-space: normal;
+              padding: 8px 5px;
+              font-size: 0.75rem;
+          }
+      }
+  </style>
+
+    <!-- Collaboration Hub Section -->
+    <div style="width: 100%; min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29sbGFib3JhdGlvbnxlbnwwfHwwfHx8MA%3D%3D') center/cover; display: flex; align-items: center; position: relative; overflow: hidden; padding: 20px; box-sizing: border-box;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 2rem; transform: translateX(100%); animation: slideInRight 1s forwards 0.5s; width: 100%; text-align: center;">
+          <div style="width: clamp(60px, 8vw, 80px); height: clamp(60px, 8vw, 80px); background-color: rgba(70,130,180,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: clamp(20px, 3vw, 30px); margin-left: auto; margin-right: auto;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="clamp(30px, 4vw, 40px)" height="clamp(30px, 4vw, 40px)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+          </div>
+          <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: clamp(15px, 2vw, 25px); line-height: 1.2;">Collaboration Hub</h2>
+          <p style="font-size: clamp(1rem, 2vw, 1.2rem); opacity: 0.9; line-height: 1.6; max-width: 100%; margin-bottom: clamp(25px, 4vw, 40px); margin-left: auto; margin-right: auto;">
+              Connect with complementary talents to bring multidisciplinary projects to life
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(10px, 2vw, 15px); max-width: 100%; margin-left: auto; margin-right: auto;">
+              <span style="background: rgba(70,130,180,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Music Videos</span>
+              <span style="background: rgba(70,130,180,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Short Films</span>
+              <span style="background: rgba(70,130,180,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Ad Campaigns</span>
+              <span style="background: rgba(70,130,180,0.15); padding: clamp(8px, 1.5vw, 10px); border-radius: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); text-align: center; white-space: nowrap;">Creative Events</span>
+          </div>
+      </div>
+  </div>
+  
+  <style>
+      @media (max-width: 768px) {
+          div[style*="min-height: 100vh"] {
+              min-height: auto;
+              padding: 40px 20px;
+          }
+          div[style*="padding: 2rem"] {
+              padding: 1.5rem;
+          }
+          div[style*="grid-template-columns"] {
+              grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          }
+      }
+      
+      @media (max-width: 480px) {
+          div[style*="min-height: 100vh"] {
+              padding: 30px 15px;
+          }
+          div[style*="padding: 2rem"] {
+              padding: 1rem;
+          }
+          div[style*="grid-template-columns"] {
+              grid-template-columns: repeat(2, 1fr);
+          }
+          span[style*="white-space: nowrap"] {
+              white-space: normal;
+              padding: 8px 5px;
+              font-size: 0.75rem;
+          }
+      }
+  </style>
+
+    <!-- Skill Development Section -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive Skill Development Section</title>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100%;
+        min-height: 100vh;
+        background:
+          linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+          url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvcmtzaG9wfGVufDB8fDB8fHww')
+          center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 0 20px;
+      }
+      .content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px;
+        transform: translateY(100px);
+        opacity: 0;
+        animation: fadeInUp 1s forwards 0.5s;
+        box-sizing: border-box;
+        color: white;
+      }
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background-color: rgba(50,205,50,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-size: 3rem;
+        margin-bottom: 25px;
+        line-height: 1.2;
+      }
+      p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+        max-width: 600px;
+        margin-bottom: 40px;
+      }
+      .tags {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        max-width: 600px;
+      }
+      .tag {
+        background: rgba(50,205,50,0.15);
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+    
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        h2 {
+          font-size: 2.5rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+        .content {
+          padding: 20px;
+        }
+      }
+      @media (max-width: 480px) {
+        h2 {
+          font-size: 2rem;
+        }
+        p {
+          font-size: 0.9rem;
+          max-width: 100%;
+        }
+        .content {
+          padding: 10px;
+        }
+        .tags {
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+          max-width: 100%;
+        }
+      }
+    </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="content">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <h2>Skill Development</h2>
+          <p>
+            Workshops and masterclasses to hone your craft across all creative disciplines
+          </p>
+          <div class="tags">
+            <span class="tag">Acting Techniques</span>
+            <span class="tag">Cinematography</span>
+            <span class="tag">Vocal Training</span>
+            <span class="tag">Editing Mastery</span>
+            <span class="tag">Design Principles</span>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+    
+    
+
+    <style>
+        @keyframes slideInLeft {
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        #creative-platform > div {
+            transition: all 0.5s ease;
+        }
+        
+        #creative-platform > div:hover {
+            transform: scale(1.005) !important;
+        }
+        
+        #creative-platform span {
+            transition: all 0.3s ease;
+        }
+        
+        #creative-platform span:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</section>
+  <!-- FOOTER START -->
+<footer id="main-footer" style="background-color: #000; color: #fff; padding: 50px 20px; font-family: 'Poppins', sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h3 style="font-size: 22px; margin-bottom: 20px; font-weight: 600; color: #fff;">Rayscape Films</h3>
+        <p style="line-height: 1.6; color: #aaa; margin-bottom: 20px;">Your vision. Our lens. Infinite stories.</p>
+        <div class="social-links" style="display: flex; gap: 15px;">
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📱</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📸</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">🎥</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📘</a>
+        </div>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Quick Links</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px;"><a href="/" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Home</a></li>
+          <li style="margin-bottom: 10px;"><a href="/about" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">About</a></li>
+          <li style="margin-bottom: 10px;"><a href="/showreel" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Showreel</a></li>
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Services</a></li>
+          <li style="margin-bottom: 10px;"><a href="/contact" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Contact</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Services</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Brand Films</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Commercials</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Music Videos</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Documentaries</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Corporate Videos</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Contact Us</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px; color: #aaa;">📞 +91 75230 79864</li>
+          <li style="margin-bottom: 10px; color: #aaa;">✉️ business@rayscapefilms.in</li>
+          <li style="margin-bottom: 10px; color: #aaa;">📍 Lucknow, India</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid #333; text-align: center; color: #777; font-size: 14px;">
+      <p>© <span id="year">2023</span> Rayscape Films. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Add this script wherever you include the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Add hover effects for footer links
+    const footerLinks = document.querySelectorAll('#main-footer a');
+    footerLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        link.style.color = '#fff';
+        link.style.transform = 'translateX(5px)';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.color = '#aaa';
+        link.style.transform = 'translateX(0)';
+      });
+    });
+  </script>
+  <!-- FOOTER END -->
+
+  <script>
+    // Navbar Toggle Function
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.getElementById('menuToggle');
+      nav.classList.toggle('open');
+      toggle.classList.toggle('open');
+    }
+
+    // Dynamic Active Link Highlighting
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop();
+        if (currentPath === linkPath || 
+            (currentPath === '' && linkPath === 'index.html') ||
+            (currentPath === 'index.html' && linkPath === '')) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

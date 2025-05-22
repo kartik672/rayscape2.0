@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #000;
+      transition: color 0.3s ease;
+    }
+
+    .logo:hover {
+      color: #555;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 1100;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #000;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #000;
+      font-size: 16px;
+      padding: 8px 15px;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #fff;
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      color: #fff !important;
+      background-color: #000;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background: rgba(255, 255, 255, 0.95);
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s ease;
+        gap: 20px;
+        z-index: 1050;
+      }
+
+      nav.open {
+        right: 0;
+      }
+
+      nav a {
+        font-size: 24px;
+        padding: 12px 20px;
+      }
+
+      nav a.active {
+        background-color: #000;
+        color: #fff !important;
+      }
+    }
+
+    @media (min-width: 768px) {
+      nav {
+        position: static;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+        background: none;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+    .contact-section {
+  padding: 100px 30px 50px;
+  background: #f9f9f9;
+}
+
+.contact-container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.contact-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-form h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  margin-top: -20px;
+}
+
+
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.contact-form button {
+  background-color: #000;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #333;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-image img {
+    max-width: 100%;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }   
+}
+
+.contact-container {
+  animation: slideInLeft 1s ease-out forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.contact-form {
+  animation: slideInRight 1s ease-out forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+/* Contact Form Styling */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #000;
+  outline: none;
+}
+
+form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+form button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background: #333;
+}
+
+form button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Rayscape Films</div>
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="navLinks">
+      <a href="/" id="homeLink">Home</a>
+      <a href="/about" id="aboutLink">About</a>
+      <a href="/showreel" id="showreelLink">Opportunities</a>
+      <a href="/services" id="servicesLink">Services</a>
+      <a href="/contact" id="contactLink">Contact</a>
+    </nav>
+    
+  </header>
+  <!-- Contact Section -->
+<section class="contact-section">
+    <div class="contact-container">
+       
+       
+            <div class="contact-image"> 
+                <img src="/public/images/contact_img.jpg" alt="Studio Image">
+             </div>
+        
+        
+      <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="contactForm" method="POST" action="/submit-contact">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Name" required>
+        
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+        
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+        
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+  <!-- EXTRACTABLE SERVICES SECTION -->
+<section style="
+background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+padding: 100px 20px;
+text-align: center;
+color: white;
+">
+<div style="
+  max-width: 1200px;
+  margin: 0 auto;
+">
+  <h2 style="
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  ">
+    Our Professional Services
+  </h2>
+  
+  <p style="
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    color: #eee;
+  ">
+    We deliver exceptional visual storytelling through our comprehensive range of production services
+  </p>
+  
+  <div style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  ">
+    <!-- Service 1 -->
+    <div style="
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.4s ease;
+    " onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='rgba(255,255,255,0.5)'" 
+       onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.2)'">
+      <div style="
+        width: 80px;
+        height: 80px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+      ">🎥</div>
+      <h3 style="
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #fff;
+      ">Cinematic Production</h3>
+      <p style="color: #ccc;">
+        Professional filming for commercials, corporate videos, and events with cinematic quality
+      </p>
+    </div>
+    
+    <!-- Service 2 -->
+    <div style="
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.4s ease;
+    " onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='rgba(255,255,255,0.5)'" 
+       onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.2)'">
+      <div style="
+        width: 80px;
+        height: 80px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+      ">✂️</div>
+      <h3 style="
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #fff;
+      ">Post-Production</h3>
+      <p style="color: #ccc;">
+        Professional editing, color grading, and visual effects using industry-leading software
+      </p>
+    </div>
+    
+    <!-- Service 3 -->
+    <div style="
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.4s ease;
+    " onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='rgba(255,255,255,0.5)'" 
+       onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.2)'">
+      <div style="
+        width: 80px;
+        height: 80px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+      ">🎬</div>
+      <h3 style="
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #fff;
+      ">Creative Direction</h3>
+      <p style="color: #ccc;">
+        Concept development and creative direction for music videos, short films, and brand content
+      </p>
+    </div>
+  </div>
+  
+  <a href="/services" style="
+    display: inline-block;
+    padding: 15px 40px;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+  " onmouseover="this.style.background='#000'; this.style.color='#fff'" 
+     onmouseout="this.style.background='#fff'; this.style.color='#000'">
+    Explore All Services
+  </a>
+</div>
+</section>
+<section id="team" style="font-family: 'Arial', sans-serif; background: #f8f8f8; padding: 60px 20px; text-align: center;">
+  <h2 style="font-size: 2.5rem; color: #222; margin-bottom: 40px; position: relative; display: inline-block;">
+      Our Amazing Team
+      <span style="content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: #FF4D4D;"></span>
+  </h2>
+  
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+      <!-- CEO - Full Width -->
+      <div class="team-member ceo-box" style="width: 100%; min-width: 300px; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; display: flex; flex-direction: column; margin-bottom: 30px;"
+           onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)'; this.style.backgroundColor='#222'; this.querySelector('h3').style.color='#fff'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#ccc'"
+           onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.1)'; this.style.backgroundColor='white'; this.querySelector('h3').style.color='#222'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#666'">
+          <div style="width: 100%; height: 400px; overflow: hidden; position: relative;">
+              <img src="/public/images/ceo.jpg" alt="Managing Director" style="width: 100%; height: 100%; object-position: top center; object-fit: cover; transition: all 0.5s ease; filter: brightness(100%);" 
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.filter='brightness(90%)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(100%)'">
+          </div>
+          <div style="width: 100%; padding: 25px; text-align: left; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box;">
+              <h3 style="color: #222; margin: 0 0 15px 0; font-size: 1.8rem; transition: color 0.3s ease;">Ayush Mishra</h3>
+              <p style="color: #FF4D4D; font-weight: bold; margin: 0 0 20px 0; font-size: 1.2rem; transition: color 0.3s ease;">Managing Director & Founder</p>
+              <p style="color: #666; margin: 0; line-height: 1.6; transition: color 0.3s ease; word-wrap: break-word;">
+                  <strong>Location:</strong> Lucknow UP India<br>
+                  <strong>Position:</strong> Direction, Screenplay Writing, Cinematography, Visual Effects Supervisor<br>
+                  <strong>Experience:</strong> Created ad script for Air India after it has been again taken back by Tata group, Leaded the winning group for ad design at UPES in marketing mania. Certified by NYFA US in cinematography. 5+ years of experience.
+              </p>
+          </div>
+      </div>
+      
+      <!-- Team Member 1 (Normalized) -->
+      <div class="team-member" style="width: calc(50% - 30px); min-width: 300px; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; display: flex; flex-direction: column;"
+           onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)'; this.style.backgroundColor='#222'; this.querySelector('h3').style.color='#fff'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#ccc'"
+           onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.1)'; this.style.backgroundColor='white'; this.querySelector('h3').style.color='#222'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#666'">
+          <div style="width: 100%; height: 250px; overflow: hidden; position: relative;">
+              <img src="/public/images/anupam.jpg" alt="Team Member 1" style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; filter: brightness(100%);" 
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.filter='brightness(90%)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(100%)'">
+          </div>
+          <div style="width: 100%; padding: 20px; text-align: left; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box;">
+              <h3 style="color: #222; margin: 0 0 10px 0; font-size: 1.5rem; transition: color 0.3s ease;">Anupam Malhotra</h3>
+              <p style="color: #FF4D4D; font-weight: bold; margin: 0 0 15px 0; transition: color 0.3s ease;">Casting Director and HR</p>
+              <p style="color: #666; margin: 0 0 15px 0; line-height: 1.5; transition: color 0.3s ease; word-wrap: break-word;">
+                  <strong>Location:</strong> Lucknow UP India<br>
+                  <strong>Achievements:</strong> Played important roles in more than 500 plays. Certified member of Nisarg.
+              </p>
+          </div>
+      </div>
+      
+      <!-- Team Member 2 (Normalized) -->
+      <div class="team-member" style="width: calc(50% - 30px); min-width: 300px; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; display: flex; flex-direction: column;"
+           onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)'; this.style.backgroundColor='#222'; this.querySelector('h3').style.color='#fff'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#ccc'"
+           onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.1)'; this.style.backgroundColor='white'; this.querySelector('h3').style.color='#222'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#666'">
+          <div style="width: 100%; height: 250px; overflow: hidden; position: relative;">
+              <img src="/public/images/shresth.jpg" alt="Team Member 2" style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease; filter: brightness(100%);" 
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.filter='brightness(90%)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(100%)'">
+          </div>
+          <div style="width: 100%; padding: 20px; text-align: left; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box;">
+              <h3 style="color: #222; margin: 0 0 10px 0; font-size: 1.5rem; transition: color 0.3s ease;">Shreshth Pratap Singh</h3>
+              <p style="color: #FF4D4D; font-weight: bold; margin: 0 0 15px 0; transition: color 0.3s ease;">Editing Head</p>
+              <p style="color: #666; margin: 0 0 15px 0; line-height: 1.5; transition: color 0.3s ease; word-wrap: break-word;">
+                  <strong>Location:</strong> Lucknow UP India<br>
+                  <strong>Experience:</strong> Certified editor, master at Adobe Premier Pro, Adobe After Effects and DaVinci Resolve.
+              </p>
+          </div>
+      </div>
+      
+      <!-- Team Member 3 -->
+      <div class="team-member" style="width: calc(50% - 30px); min-width: 300px; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; display: flex; flex-direction: column;"
+           onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)'; this.style.backgroundColor='#222'; this.querySelector('h3').style.color='#fff'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#ccc'"
+           onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.1)'; this.style.backgroundColor='white'; this.querySelector('h3').style.color='#222'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#666'">
+          <div style="width: 100%; height: 250px; overflow: hidden; position: relative;">
+              <img src="/public/images/hitansh.jpg" alt="Team Member 3" style="width: 100%; height: 100%; object-position: top center; object-fit: cover; transition: all 0.5s ease; filter: brightness(100%);" 
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.filter='brightness(90%)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(100%)'">
+          </div>
+          <div style="width: 100%; padding: 20px; text-align: left; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box;">
+              <h3 style="color: #222; margin: 0 0 10px 0; font-size: 1.5rem; transition: color 0.3s ease;">Hitvansh Srivastava</h3>
+              <p style="color: #FF4D4D; font-weight: bold; margin: 0 0 15px 0; transition: color 0.3s ease;">Music Head</p>
+              <p style="color: #666; margin: 0 0 15px 0; line-height: 1.5; transition: color 0.3s ease; word-wrap: break-word;">
+                  <strong>Location:</strong> Lucknow UP India<br>
+                  <strong>Skills:</strong> Guitarist, Studio Director, Vocal Recording, Mixing, Mastering, Music Production, Voice over, Background Music Design
+              </p>
+          </div>
+      </div>
+      
+      <!-- Team Member 4 -->
+      <div class="team-member" style="width: calc(50% - 30px); min-width: 300px; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; display: flex; flex-direction: column;"
+           onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)'; this.style.backgroundColor='#222'; this.querySelector('h3').style.color='#fff'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#ccc'"
+           onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.1)'; this.style.backgroundColor='white'; this.querySelector('h3').style.color='#222'; this.querySelectorAll('p')[0].style.color='#FF4D4D'; this.querySelectorAll('p')[1].style.color='#666'">
+          <div style="width: 100%; height: 250px; overflow: hidden; position: relative;">
+              <img src="/public/images/myselfupdated.jpg" alt="Team Member 4" style="width: 100%; height: 100%; object-position: top center; object-fit: cover; transition: all 0.5s ease; filter: brightness(100%);" 
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.filter='brightness(90%)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(100%)'">
+          </div>
+          <div style="width: 100%; padding: 20px; text-align: left; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box;">
+              <h3 style="color: #222; margin: 0 0 10px 0; font-size: 1.5rem; transition: color 0.3s ease;">Kartikeya Ruhela</h3>
+              <p style="color: #FF4D4D; font-weight: bold; margin: 0 0 15px 0; transition: color 0.3s ease;">Web & Tech Lead</p>
+              <p style="color: #666; margin: 0 0 15px 0; line-height: 1.5; transition: color 0.3s ease; word-wrap: break-word;">
+                  <strong>Location:</strong> Lucknow, UP, India<br>
+                  <strong>Skills:</strong> Full-stack Web Developer, UI/UX Designer, Assists the team with technical solutions, Node.js Specialist, Technical Strategist, CMS Management, Responsive Design Architect. Also manages deployment.
+              </p>
+          </div>
+      </div>
+  </div>
+</section>
+
+<style>
+  /* Mobile-first styles (stacked layout) */
+  .team-member {
+      flex-direction: column !important;
+      margin-bottom: 30px;
+  }
+  
+  .team-member > div:first-child {
+      width: 100% !important;
+      height: 250px !important;
+  }
+  
+  .team-member > div:last-child {
+      width: 100% !important;
+      padding: 20px !important;
+      box-sizing: border-box !important;
+  }
+  
+  .ceo-box > div:first-child {
+      height: 400px !important;
+  }
+  
+  .ceo-box > div:last-child {
+      padding: 25px !important;
+  }
+  
+  /* Image positioning - CEO and Members 3-4 focus on top */
+  .ceo-box img,
+  .team-member:nth-child(4) img,
+  .team-member:nth-child(5) img {
+      object-position: top center !important;
+  }
+  
+  /* Normalized image positioning for Members 1-2 */
+  .team-member:nth-child(2) img,
+  .team-member:nth-child(3) img {
+      object-position: center !important;
+  }
+  
+  /* All images use cover */
+  .team-member img {
+      object-fit: cover !important;
+  }
+  
+  /* Text overflow prevention */
+  .team-member p {
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+  }
+  
+  /* Desktop styles (side-by-side layout) */
+  @media (min-width: 992px) {
+      .team-member {
+          flex-direction: row !important;
+          height: 250px !important;
+      }
+      
+      .team-member > div:first-child {
+          width: 40% !important;
+          height: 100% !important;
+      }
+      
+      .team-member > div:last-child {
+          width: 60% !important;
+      }
+      
+      .ceo-box {
+          flex-direction: row !important;
+          height: 400px !important;
+      }
+      
+      .ceo-box > div:first-child {
+          width: 30% !important;
+          height: 100% !important;
+      }
+      
+      .ceo-box > div:last-child {
+          width: 70% !important;
+      }
+  }
+  
+  /* Adjustments for medium screens */
+  @media (max-width: 768px) {
+      .team-member {
+          width: 100% !important;
+      }
+  }
+</style>
+
+
+
+
+
+  <!-- FOOTER START -->
+  <footer id="main-footer" style="background-color: #000; color: #fff; padding: 50px 20px; font-family: 'Poppins', sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h3 style="font-size: 22px; margin-bottom: 20px; font-weight: 600; color: #fff;">Rayscape Films</h3>
+        <p style="line-height: 1.6; color: #aaa; margin-bottom: 20px;">Your vision. Our lens. Infinite stories.</p>
+        <div class="social-links" style="display: flex; gap: 15px;">
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📱</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📸</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">🎥</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📘</a>
+        </div>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Quick Links</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px;"><a href="/" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Home</a></li>
+          <li style="margin-bottom: 10px;"><a href="/about" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">About</a></li>
+          <li style="margin-bottom: 10px;"><a href="/showreel" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">opportunities</a></li>
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Services</a></li>
+          <li style="margin-bottom: 10px;"><a href="/contact" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Contact</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Services</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Video Editing</a></li>
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Commercials</a></li>
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Music Videos</a></li>
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Documentaries</a></li>
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Corporate Videos</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Contact Us</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px; color: #aaa;">📞 +91 75230 79864</li>
+          <li style="margin-bottom: 10px; color: #aaa;">✉️ business@rayscapefilms.in</li>
+          <li style="margin-bottom: 10px; color: #aaa;">📍 Lucknow,India</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid #333; text-align: center; color: #777; font-size: 14px;">
+      <p>© <span id="year">2023</span> Rayscape Films. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Add this script wherever you include the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Add hover effects for footer links
+    const footerLinks = document.querySelectorAll('#main-footer a');
+    footerLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        link.style.color = '#fff';
+        link.style.transform = 'translateX(5px)';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.color = '#aaa';
+        link.style.transform = 'translateX(0)';
+      });
+    });
+  </script>
+<!-- END EXTRACTABLE SECTION -->
+
+<script>
+// Simple animation for service cards when they come into view
+document.addEventListener('DOMContentLoaded', function() {
+  const serviceCards = document.querySelectorAll('[style*="background: rgba(255,255,255,0.1)"]');
+  
+  serviceCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+    
+    setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, 300);
+  });
+});
+</script>
+
+  <script>
+    // Navbar Toggle Function
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.getElementById('menuToggle');
+      nav.classList.toggle('open');
+      toggle.classList.toggle('open');
+    }
+
+    // Dynamic Active Link Highlighting
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop();
+        if (currentPath === linkPath || 
+            (currentPath === '' && linkPath === 'index.html') ||
+            (currentPath === 'index.html' && linkPath === '')) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
+  </script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const form = e.target;
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(Object.fromEntries(formData))
+        });
+        
+        if (response.ok) {
+          alert('Your message has been sent successfully!');
+          form.reset();
+        } else {
+          throw new Error('Failed to submit form');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('There was an error sending your message. Please try again.');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Message';
+      }
+    });
+  </script>
+</body>
+</html>

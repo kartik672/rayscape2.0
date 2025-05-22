@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #000;
+      transition: color 0.3s ease;
+    }
+
+    .logo:hover {
+      color: #555;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 1100;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #000;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #000;
+      font-size: 16px;
+      padding: 8px 15px;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #fff;
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      color: #fff !important;
+      background-color: #000;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background: rgba(255, 255, 255, 0.95);
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s ease;
+        gap: 20px;
+        z-index: 1050;
+      }
+
+      nav.open {
+        right: 0;
+      }
+
+      nav a {
+        font-size: 24px;
+        padding: 12px 20px;
+      }
+
+      nav a.active {
+        background-color: #000;
+        color: #fff !important;
+      }
+    }
+
+    @media (min-width: 768px) {
+      nav {
+        position: static;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+        background: none;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+    .fullscreen-hero {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 70px; /* To account for fixed navbar */
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      padding: 0 20px;
+      max-width: 800px;
+    }
+
+    .hero-content h1 {
+      font-size: 4.5vw;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+      font-size: 1.5vw;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .about-section {
+      padding: 80px 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 50px;
+      color: #000;
+      position: relative;
+    }
+
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #000;
+      margin: 15px auto 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .about-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+
+    .card-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #000;
+    }
+
+    .card-content p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .team-section {
+      background: #f9f9f9;
+      padding: 80px 30px;
+      text-align: center;
+    }
+
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .team-member {
+      flex: 1 1 250px;
+      max-width: 280px;
+    }
+
+    .member-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 5px solid #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .member-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .member-role {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .stats-section {
+      padding: 60px 30px;
+      background: #000;
+      color: #fff;
+      text-align: center;
+    }
+
+    .stats-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      margin: 20px;
+      flex: 1 1 150px;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-member {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Rayscape Films</div>
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="navLinks">
+      <a href="/" id="homeLink">Home</a>
+      <a href="/about" id="aboutLink">About</a>
+      <a href="/showreel" id="showreelLink">Opportunities</a>
+      <a href="/services" id="servicesLink">Services</a>
+      <a href="/contact" id="contactLink">Contact</a>
+    </nav>
+  </header>
+
+  <section class="fullscreen-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Our Story</h1>
+      <p>Where creativity meets technical excellence in filmmaking</p>
+    </div>
+  </section>
+
+  <!-- Page 2: About Content -->
+  <section class="about-section">
+    <h2 class="section-title">Who We Are</h2>
+    
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="card-content">
+          <h3>Filmmaking & Events</h3>
+          <p>We are a full-service production company specializing in cinematic storytelling for films, corporate events, weddings, and special occasions. Our team captures the essence of every moment with artistic vision.</p>
+        </div>
+      </div>
+      
+      <div class="about-card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="card-content">
+          <h3>Cinematic Production</h3>
+          <p>Using industry-leading software and equipment, we deliver professional-grade videography and editing services that transform raw footage into compelling visual narratives.</p>
+        </div>
+      </div>
+      
+      <div class="about-card">
+        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="card-content">
+          <h3>Creative Collective</h3>
+          <p>We serve as a platform bringing together talented individuals in acting, photography, editing, singing, and graphic design - fostering collaboration under one creative roof.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+      <!-- Creative Platform Section -->
+      <section style="background:#f0f0f0;border-radius:12px;padding:40px;margin-bottom:60px;">
+        <h2 style="text-align:center;font-size:2.5rem;margin-bottom:30px;color:#222;font-family:'Playfair Display',serif;">Creative Collaboration Platform</h2>
+        <p style="text-align:center;font-size:1.2rem;max-width:800px;margin:0 auto 40px;color:#555;">
+          A unique platform for individuals in field of acting, photography, editing, singing and graphic designing under one roof
+        </p>
+        
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:30px;">
+          <div style="background:white;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:25px;text-align:center;">
+            <div style="width:80px;height:80px;background:#000;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;">🎭</div>
+            <h3 style="font-size:1.3rem;margin-top:0;color:#222;">Actors</h3>
+            <p style="color:#666;font-size:0.9rem;">Connect with talented performers for your projects</p>
+          </div>
+          
+          <div style="background:white;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:25px;text-align:center;">
+            <div style="width:80px;height:80px;background:#000;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;">📷</div>
+            <h3 style="font-size:1.3rem;margin-top:0;color:#222;">Photographers</h3>
+            <p style="color:#666;font-size:0.9rem;">Find skilled visual storytellers</p>
+          </div>
+          
+          <div style="background:white;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:25px;text-align:center;">
+            <div style="width:80px;height:80px;background:#000;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;">✂️</div>
+            <h3 style="font-size:1.3rem;margin-top:0;color:#222;">Editors</h3>
+            <p style="color:#666;font-size:0.9rem;">Post-production specialists</p>
+          </div>
+          
+          <div style="background:white;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:25px;text-align:center;">
+            <div style="width:80px;height:80px;background:#000;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;">🎤</div>
+            <h3 style="font-size:1.3rem;margin-top:0;color:#222;">Singers</h3>
+            <p style="color:#666;font-size:0.9rem;">Vocal talent for your music projects</p>
+          </div>
+          
+          <div style="background:white;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:25px;text-align:center;">
+            <div style="width:80px;height:80px;background:#000;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;">🎨</div>
+            <h3 style="font-size:1.3rem;margin-top:0;color:#222;">Designers</h3>
+            <p style="color:#666;font-size:0.9rem;">Creative visuals and graphics</p>
+          </div>
+        </div>
+      </section>
+
+  <!-- <section class="team-section">
+    <h2 class="section-title">Our Creative Team</h2>
+    
+    <div class="team-members">
+      <div class="team-member">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cinematographer" class="member-image">
+        <div class="member-name">Rajesh Kumar</div>
+        <div class="member-role">Lead Cinematographer</div>
+      </div>
+      
+      <div class="team-member">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Editor" class="member-image">
+        <div class="member-name">Priya Sharma</div>
+        <div class="member-role">Senior Video Editor</div>
+      </div>
+      
+      <div class="team-member">
+        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Director" class="member-image">
+        <div class="member-name">Amit Patel</div>
+        <div class="member-role">Creative Director</div>
+      </div>
+      
+      <div class="team-member">
+        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Designer" class="member-image">
+        <div class="member-name">Neha Gupta</div>
+        <div class="member-role">Graphic Designer</div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Satisfied Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Awards Won</div>
+      </div>
+    </div>
+  </section> -->
+  <!-- EXTRACTABLE SERVICES SECTION -->
+  <section style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; background-color: #000; overflow: hidden;">
+    <!-- YouTube Video (Autoplay, Muted) -->
+    <iframe 
+      width="100%" 
+      height="100%" 
+      src="https://www.youtube.com/embed/GU_CibK7-zo?autoplay=1&mute=1&loop=1&playlist=GU_CibK7-zo&controls=0" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen
+      style="position: absolute; top: 0; left: 0;"
+    ></iframe>
+     
+    <!-- Overlay Text -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background: rgba(0,0,0,0.3);">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);"></h2>
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Our Showreel</h3>
+        <p style="font-size: 1.1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);"></p>
+      </div>
+    </div>
+  </section>
+<section style="
+background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+padding: 80px 20px;
+text-align: center;
+color: white;
+">
+<div style="
+  max-width: 1200px;
+  margin: 0 auto;
+">
+  <h2 style="
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  ">
+    Check Out the Services We Provide
+  </h2>
+  
+  <div style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+  ">
+    <div style="
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(5px);
+      padding: 30px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    " onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.2)'" 
+       onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+      <h3 style="
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #fff;
+      ">Cinematic Videography</h3>
+      <p style="color: #ddd;">Professional filming for films, commercials, and events with cinematic quality.</p>
+    </div>
+    
+    <div style="
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(5px);
+      padding: 30px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    " onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.2)'" 
+       onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+      <h3 style="
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #fff;
+      ">Professional Editing</h3>
+      <p style="color: #ddd;">Industry-leading post-production and editing services.</p>
+    </div>
+    
+    <div style="
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(5px);
+      padding: 30px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    " onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.2)'" 
+       onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+      <h3 style="
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #fff;
+      ">Music Video Production</h3>
+      <p style="color: #ddd;">Creative music video shoots with unique visual storytelling.</p>
+    </div>
+  </div>
+  
+  <a href="/services" style="
+    display: inline-block;
+    margin-top: 50px;
+    padding: 12px 30px;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  " onmouseover="this.style.background='#000'; this.style.color='#fff'" 
+     onmouseout="this.style.background='#fff'; this.style.color='#000'">
+    Explore All Services
+  </a>
+</div>
+</section>
+
+<!-- END EXTRACTABLE SECTION -->
+  <!-- FOOTER START -->
+  <footer id="main-footer" style="background-color: #000; color: #fff; padding: 50px 20px; font-family: 'Poppins', sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h3 style="font-size: 22px; margin-bottom: 20px; font-weight: 600; color: #fff;">Rayscape Films</h3>
+        <p style="line-height: 1.6; color: #aaa; margin-bottom: 20px;">Your vision. Our lens. Infinite stories.</p>
+        <div class="social-links" style="display: flex; gap: 15px;">
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📱</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📸</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">🎥</a>
+          <a href="#" style="color: #fff; font-size: 20px; transition: all 0.3s ease;">📘</a>
+        </div>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Quick Links</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px;"><a href="/" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Home</a></li>
+          <li style="margin-bottom: 10px;"><a href="/about" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">About</a></li>
+          <li style="margin-bottom: 10px;"><a href="/showreel" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Showreel</a></li>
+          <li style="margin-bottom: 10px;"><a href="/services" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Services</a></li>
+          <li style="margin-bottom: 10px;"><a href="/contact" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Contact</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Services</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Brand Films</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Commercials</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Music Videos</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Documentaries</a></li>
+          <li style="margin-bottom: 10px;"><a href="#" style="color: #aaa; text-decoration: none; transition: all 0.3s ease; display: inline-block;">Corporate Videos</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-col" style="margin-bottom: 20px;">
+        <h4 style="font-size: 18px; margin-bottom: 20px; font-weight: 500; color: #fff;">Contact Us</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px; color: #aaa;">📞 +91 75230 79864</li>
+          <li style="margin-bottom: 10px; color: #aaa;">✉️ business@rayscapefilms.in</li>
+          <li style="margin-bottom: 10px; color: #aaa;">📍 Lucknow, India</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid #333; text-align: center; color: #777; font-size: 14px;">
+      <p>© <span id="year">2023</span> Rayscape Films. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Add this script wherever you include the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Add hover effects for footer links
+    const footerLinks = document.querySelectorAll('#main-footer a');
+    footerLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        link.style.color = '#fff';
+        link.style.transform = 'translateX(5px)';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.color = '#aaa';
+        link.style.transform = 'translateX(0)';
+      });
+    });
+  </script>
+<script>
+// This simple script can be included once on the page
+document.addEventListener('DOMContentLoaded', function() {
+  // Add any JavaScript functionality you need here
+  // For example, animation triggers or other interactions
+});
+</script>
+
+
+  <script>
+    // Simple animation for stats counting
+    const statNumbers = document.querySelectorAll('.stat-number');
+    statNumbers.forEach(stat => {
+      const target = +stat.innerText.replace('+', '');
+      const increment = target / 30;
+      let current = 0;
+      
+      const updateNumber = () => {
+        if (current < target) {
+          current += increment;
+          stat.innerText = Math.floor(current) + (stat.innerText.includes('+') ? '+' : '');
+          requestAnimationFrame(updateNumber);
+        } else {
+          stat.innerText = target + (stat.innerText.includes('+') ? '+' : '');
+        }
+      };
+      
+      // Start counting when section is in view
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          updateNumber();
+          observer.unobserve(stat);
+        }
+      });
+      
+      observer.observe(stat);
+    });
+    // Navbar Toggle Function
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.getElementById('menuToggle');
+      nav.classList.toggle('open');
+      toggle.classList.toggle('open');
+    }
+
+    // Dynamic Active Link Highlighting
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop();
+        if (currentPath === linkPath || 
+            (currentPath === '' && linkPath === 'index.html') ||
+            (currentPath === 'index.html' && linkPath === '')) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
