@@ -53,7 +53,7 @@ app.post('/submit-form', (req, res) => {
 
   const mailOptions = {
     from: 'kartikruhela672@gmail.com',
-    to: 'mukeshkurmi732@gmail.com', // can be same as from or different
+    to: 'business@rayscapefilms.in', // can be same as from or different
     subject: `New Application for ${position}`,
     text: `
       Name: ${name}
@@ -95,7 +95,7 @@ app.post('/submit-contact', (req, res) => {
 
   const mailOptions = {
     from: `"Contact Form" <${process.env.EMAIL_USER}>`,
-    to: 'mukeshkurmi732@gmail.com', // Sending to yourself
+    to: 'business@rayscapefilms.in', // Sending to yourself
     replyTo: email, // So you can reply directly to the sender
     subject: `New Contact Form Submission from ${name}`,
     text: `
